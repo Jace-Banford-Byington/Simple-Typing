@@ -74,12 +74,12 @@ body {
 }
 
 .correct_char {
-  color: darkgreen;
+  color: #2589BD;
 }
 
 .restart_btn {
   display: none;
-  background-color: #326765;
+  background-color: #A3B4A2;
   font-size: 1.5rem;
   padding: 10px;
   border: 0px;
