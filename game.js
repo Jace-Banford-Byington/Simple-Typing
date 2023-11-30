@@ -34,6 +34,8 @@ let characterTyped = 0;
 let current_quote = "";
 let quoteNo = 0;
 let timer = null;
+let wordTyped = 0;
+
 
 function updateQuote() {
   quote_text.textContent = null;
@@ -62,6 +64,7 @@ function processCurrentText() {
 
   // increment total characters typed
   characterTyped++;
+
 
   errors = 0;
 
@@ -158,6 +161,19 @@ function startGame() {
 
   resetValues();
   updateQuote();
+
+
+  input_area.addEventListener('input', function (e){
+    //if the space bar clicked update wordsTyped
+    if(e.data === ' '){
+        //increment total words typed.
+       wordTyped++;
+       wpm_text.textContent = wordTyped;
+
+    }
+    processCurrentText()
+  });
+
 
   // clear old and start a new timer
   clearInterval(timer);
