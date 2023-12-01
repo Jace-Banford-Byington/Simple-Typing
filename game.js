@@ -9,7 +9,6 @@ let quotes_array = [
   "4. It's going to be hard, but hard does not mean impossible.",
   "5. Learning never exhausts the mind.",
   "6. The only way to do great work is to love what you do.",
-  "7. You are a gay bitch :))"
 ];
 
 // selecting required elements
