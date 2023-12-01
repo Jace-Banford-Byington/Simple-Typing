@@ -1,5 +1,5 @@
 body {
-  background-color: #ABC4FF;
+  background-color: #96D7FF;
   color: black;
   text-align: center;
 }
@@ -23,9 +23,11 @@ body {
 
 .timer, .errors,
 .accuracy, .cpm, .wpm {
-  background-color: #ccda46;
+  background-color: #EABAF6;
+  display: inline;
   height: 60px;
   width: 70px;
+  min-width: min-content;
   margin: 8px;
   padding: 12px;
   border-radius: 20%;
@@ -45,11 +47,11 @@ body {
 .curr_time, .curr_errors,
 .curr_accuracy, .curr_cpm,
 .curr_wpm {
-  font-size: 3em;
+  font-size: 2.4em;
 }
 
 .quote {
-  background-color: #ccda46;
+  background-color: #B9B5FF;
   font-size: 1.5rem;
   margin: 10px;
   padding: 25px;
@@ -57,7 +59,7 @@ body {
 }
 
 .input_area {
-  background-color: #f5f5c6;
+  background-color: #68EDC6;
   height: 80px;
   width: 40%;
   font-size: 1.5rem;
@@ -74,7 +76,7 @@ body {
 }
 
 .correct_char {
-  color: #2589BD;
+  color: #E5E1EE;
 }
 
 .restart_btn {

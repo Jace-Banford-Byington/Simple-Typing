@@ -103,7 +103,7 @@ function processCurrentText() {
   // update accuracy text
   let correctCharacters = (characterTyped - (total_errors + errors));
   let accuracyVal = ((correctCharacters / characterTyped) * 100);
-  accuracy_text.textContent = Math.round(accuracyVal);
+  accuracy_text.textContent = Math.round(accuracyVal) + '%';
 
   // if current text is completely typed
   // irrespective of errors
