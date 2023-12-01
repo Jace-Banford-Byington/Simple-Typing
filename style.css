@@ -1,5 +1,5 @@
 body {
-  background-color: #fe9801;
+  background-color: #ABC4FF;
   color: black;
   text-align: center;
 }
@@ -45,7 +45,7 @@ body {
 .curr_time, .curr_errors,
 .curr_accuracy, .curr_cpm,
 .curr_wpm {
-  font-size: 2.75rem;
+  font-size: 3em;
 }
 
 .quote {

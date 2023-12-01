@@ -3,12 +3,13 @@ let TIME_LIMIT = 60;
 
 // define quotes to be used
 let quotes_array = [
-  "Push yourself, because no one else is going to do it for you.",
-  "Failure is the condiment that gives success its flavor.",
-  "Wake up with determination. Go to bed with satisfaction.",
-  "It's going to be hard, but hard does not mean impossible.",
-  "Learning never exhausts the mind.",
-  "The only way to do great work is to love what you do."
+  "1. Push yourself, because no one else is going to do it for you.",
+  "2. Failure is the condiment that gives success its flavor.",
+  "3. Wake up with determination. Go to bed with satisfaction.",
+  "4. It's going to be hard, but hard does not mean impossible.",
+  "5. Learning never exhausts the mind.",
+  "6. The only way to do great work is to love what you do.",
+  "7. You are a gay bitch :))"
 ];
 
 // selecting required elements
@@ -39,7 +40,12 @@ let wordTyped = 0;
 
 function updateQuote() {
   quote_text.textContent = null;
-  current_quote = quotes_array[quoteNo];
+
+  //Randomize what quote is got from the array
+  const randomIndex = Math.floor(Math.random() * quotes_array.length);
+  console.log("Random Index: ", randomIndex)
+  console.log("Current Quote: ", current_quote);
+  current_quote = quotes_array[randomIndex];
 
   // separate each character and make an element 
   // out of each of them to individually style them
