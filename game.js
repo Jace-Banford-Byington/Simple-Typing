@@ -1,15 +1,37 @@
 // define the time limit
 let TIME_LIMIT = 60;
 
+async function fetchQuotes(){
+  try{
+    const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Api-Key': '1Hd3m1qKNC2hFndMqeMxvA==FHluwqsEJqZu8eby'
+      }
+    });
+    const data = await response.json();
+    console.log("Data", data )
+    return data.content;
+  }
+  catch(err){
+    console.error("Error fetching the quote, ", err)
+    return ''; //returns empty string in case of error
+  }
+}
+
+
+//https://api.api-ninjas.com/v1/quotes?category=life
+
+
 // define quotes to be used
-let quotes_array = [
-  "1. Push yourself, because no one else is going to do it for you.",
-  "2. Failure is the condiment that gives success its flavor.",
-  "3. Wake up with determination. Go to bed with satisfaction.",
-  "4. It's going to be hard, but hard does not mean impossible.",
-  "5. Learning never exhausts the mind.",
-  "6. The only way to do great work is to love what you do.",
-];
+// let quotes_array = [
+//   "1. Push yourself, because no one else is going to do it for you.",
+//   "2. Failure is the condiment that gives success its flavor.",
+//   "3. Wake up with determination. Go to bed with satisfaction.",
+//   "4. It's going to be hard, but hard does not mean impossible.",
+//   "5. Learning never exhausts the mind.",
+//   "6. The only way to do great work is to love what you do.",
+// ];
 
 // selecting required elements
 let timer_text = document.querySelector(".curr_time");
@@ -37,14 +59,16 @@ let timer = null;
 let wordTyped = 0;
 
 
-function updateQuote() {
+async function updateQuote() {
   quote_text.textContent = null;
+  current_quote =  await fetchQuotes();
 
-  //Randomize what quote is got from the array
-  const randomIndex = Math.floor(Math.random() * quotes_array.length);
-  console.log("Random Index: ", randomIndex)
-  console.log("Current Quote: ", current_quote);
-  current_quote = quotes_array[randomIndex];
+  console.log("Current Quote", current_quote);
+  // //Randomize what quote is got from the array
+  // const randomIndex = Math.floor(Math.random() * quotes_array.length);
+  // console.log("Random Index: ", randomIndex)
+  // console.log("Current Quote: ", current_quote);
+  // current_quote = quotes_array[randomIndex];
 
   // separate each character and make an element 
   // out of each of them to individually style them
