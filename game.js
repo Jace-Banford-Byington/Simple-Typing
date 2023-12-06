@@ -11,7 +11,7 @@ async function fetchQuotes(){
     });
     const data = await response.json();
     console.log("Data", data )
-    return data.content;
+    return data[0];
   }
   catch(err){
     console.error("Error fetching the quote, ", err)
@@ -61,14 +61,13 @@ let wordTyped = 0;
 
 async function updateQuote() {
   quote_text.textContent = null;
-  current_quote =  await fetchQuotes();
+  const newQuote = await fetchQuotes();
+  // console.log("New Quote", newQuote);
+  // console.log("New Quote.Quote", newQuote.quote)
+  current_quote = newQuote.quote + " By: " + newQuote.author;
 
-  console.log("Current Quote", current_quote);
-  // //Randomize what quote is got from the array
-  // const randomIndex = Math.floor(Math.random() * quotes_array.length);
-  // console.log("Random Index: ", randomIndex)
-  // console.log("Current Quote: ", current_quote);
-  // current_quote = quotes_array[randomIndex];
+  // console.log("Current Quote", current_quote);
+
 
   // separate each character and make an element 
   // out of each of them to individually style them
