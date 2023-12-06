@@ -34,9 +34,6 @@ body {
   box-shadow: black 5px 8px 5px;
 }
 
-.cpm, .wpm  {
-  display: none;
-}
 
 .header_text {
   text-transform: uppercase;
@@ -81,7 +78,7 @@ body {
 
 .restart_btn {
   display: none;
-  background-color: #A3B4A2;
+  background-color: #ffd6a5;
   font-size: 1.5rem;
   padding: 10px;
   border: 0px;

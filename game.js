@@ -1,38 +1,6 @@
 // define the time limit
 let TIME_LIMIT = 60;
 
-async function fetchQuotes(){
-  try{
-    const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Api-Key': '1Hd3m1qKNC2hFndMqeMxvA==FHluwqsEJqZu8eby'
-      }
-    });
-    const data = await response.json();
-    console.log("Data", data )
-    return data[0];
-  }
-  catch(err){
-    console.error("Error fetching the quote, ", err)
-    return ''; //returns empty string in case of error
-  }
-}
-
-
-//https://api.api-ninjas.com/v1/quotes?category=life
-
-
-// define quotes to be used
-// let quotes_array = [
-//   "1. Push yourself, because no one else is going to do it for you.",
-//   "2. Failure is the condiment that gives success its flavor.",
-//   "3. Wake up with determination. Go to bed with satisfaction.",
-//   "4. It's going to be hard, but hard does not mean impossible.",
-//   "5. Learning never exhausts the mind.",
-//   "6. The only way to do great work is to love what you do.",
-// ];
-
 // selecting required elements
 let timer_text = document.querySelector(".curr_time");
 let accuracy_text = document.querySelector(".curr_accuracy");
@@ -58,6 +26,24 @@ let quoteNo = 0;
 let timer = null;
 let wordTyped = 0;
 
+async function fetchQuotes(){
+  try{
+    const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Api-Key': '1Hd3m1qKNC2hFndMqeMxvA==FHluwqsEJqZu8eby'
+      }
+    });
+    const data = await response.json();
+    // console.log("Data", data )
+    return data[0];
+  }
+  catch(err){
+    console.error("Error fetching the quote, ", err)
+    return ''; //returns empty string in case of error
+  }
+}
+
 
 async function updateQuote() {
   quote_text.textContent = null;
@@ -76,12 +62,6 @@ async function updateQuote() {
     charSpan.innerText = char
     quote_text.appendChild(charSpan)
   })
-
-  // roll over to the first quote
-  if (quoteNo < quotes_array.length - 1)
-    quoteNo++;
-  else
-    quoteNo = 0;
 }
 
 function processCurrentText() {
@@ -96,10 +76,14 @@ function processCurrentText() {
 
   errors = 0;
 
+
   quoteSpanArray = quote_text.querySelectorAll('span');
   quoteSpanArray.forEach((char, index) => {
     let typedChar = curr_input_array[index]
+    
+  
 
+    
     // characters not currently typed
     if (typedChar == null) {
       char.classList.remove('correct_char');
@@ -118,6 +102,9 @@ function processCurrentText() {
       // increment number of errors
       errors++;
     }
+
+
+
   });
 
   // display the number of errors
@@ -127,6 +114,16 @@ function processCurrentText() {
   let correctCharacters = (characterTyped - (total_errors + errors));
   let accuracyVal = ((correctCharacters / characterTyped) * 100);
   accuracy_text.textContent = Math.round(accuracyVal) + '%';
+
+  //calculate wpm text
+  let currentTime = timeElapsed / 60;
+  wpm = Math.round((wordTyped / currentTime));
+  wpm_text.textContent = wpm;
+
+    ////////////Function logic from ChatGPT///////////////////
+    wpm = Math.round((wordTyped / currentTime));
+    wpm_text.textContent = wpm;
+    /////////////////////////////////////////////////////////
 
   // if current text is completely typed
   // irrespective of errors
@@ -173,11 +170,9 @@ function finishGame() {
 
   // calculate cpm and wpm
   cpm = Math.round(((characterTyped / timeElapsed) * 60));
-  wpm = Math.round((((characterTyped / 5) / timeElapsed) * 60));
 
   // update cpm and wpm text
   cpm_text.textContent = cpm;
-  wpm_text.textContent = wpm;
 
   // display the cpm and wpm
   cpm_group.style.display = "block";
@@ -225,5 +220,4 @@ function resetValues() {
   error_text.textContent = 0;
   restart_btn.style.display = "none";
   cpm_group.style.display = "none";
-  wpm_group.style.display = "none";
 }
