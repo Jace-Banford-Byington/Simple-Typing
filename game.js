@@ -109,8 +109,6 @@ quoteSpanArray = quote_text.querySelectorAll('span');
       errors++;
     }
 
-
-
   });
 
   // display the number of errors
@@ -121,6 +119,9 @@ quoteSpanArray = quote_text.querySelectorAll('span');
   let accuracyVal = ((correctCharacters / characterTyped) * 100);
   accuracy_text.textContent = Math.round(accuracyVal) + '%';
 
+
+
+
   //calculate wpm text
   let currentTime = timeElapsed / 60;
   wpm = Math.round((wordTyped / currentTime));
@@ -130,6 +131,17 @@ quoteSpanArray = quote_text.querySelectorAll('span');
     wpm = Math.round((wordTyped / currentTime));
     wpm_text.textContent = wpm;
     /////////////////////////////////////////////////////////
+
+
+  // // handle sentence count
+  // if (curr_input.length > 0) {
+  //   let lastChar = curr_input_array[curr_input.length - 1];
+  //   if (lastChar === '.') {
+  //     sentencesTyped++;
+  //     sentences_text.textContent = sentencesTyped;
+  //   }
+  // }
+
 
   // if current text is completely typed
   // irrespective of errors
@@ -192,32 +204,35 @@ function startGame() {
   updateQuote();
 
 
-  input_area.addEventListener('input', function (e){
-    //if the space bar clicked update wordsTyped
-    if(e.data === ' '){
-        //increment total words typed.
-       wordTyped++;
-       wpm_text.textContent = wordTyped;
-
+  input_area.addEventListener('input', function (e) {
+    // Handle space bar
+    if (e.data === ' ') {
+      // Increment total words typed
+      wordTyped++;
+      wpm_text.textContent = wordTyped;
     }
-    //check if . was pressed 
-    if(e.data === '.'){
-      sentencesTyped++;
-      sentences_text.textContent = sentencesTyped;
-    }
+  
+// Check for period key
+let lastChar = curr_input.charAt(curr_input.length - 1);
+if (lastChar === '.') {
+  // Increase sentences
+  sentencesTyped++;
+  sentences_text.textContent = sentencesTyped;
+}
 
-    processCurrentText()
-  });
+// Check for deletion of a period
+if (e.inputType === 'deleteContentBackward') {
+  let lastCharIndex = input_area.selectionStart;
+  let deletedChar = input_area.value[lastCharIndex - 1];
 
-   // Check for Backspace key to handle character deletion
-   input_area.addEventListener('keydown', function (e) {
-    if (e.key === 'Backspace' && e.target.selectionStart === 0) {
-      // If the deleted character is a period, decrement sentencesTyped
-      if (curr_input.charAt(0) === '.') {
-        sentencesTyped = Math.max(0, sentencesTyped - 1);
-        sentences_text.textContent = sentencesTyped;
-      }
-    }
+  if (deletedChar === '.') {
+    sentencesTyped--;
+    sentences_text.textContent = sentencesTyped;
+  }
+}
+
+  
+    processCurrentText();
   });
 
 
