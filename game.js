@@ -32,6 +32,15 @@ let wordTyped = 0;
 let sentencesTyped = 0;
 
 
+
+// event listener for radio button changes
+document.addEventListener('DOMContentLoaded', function () {
+  let radioButtons = document.getElementsByName('timer');
+  for (let radioButton of radioButtons) {
+    radioButton.addEventListener('change', handleTimeChange);
+  }
+});
+
 async function fetchQuotes(){
   try{
     const response = await fetch('https://api.api-ninjas.com/v1/quotes', {
@@ -47,6 +56,18 @@ async function fetchQuotes(){
   catch(err){
     console.error("Error fetching the quote, ", err)
     return ''; //returns empty string in case of error
+  }
+}
+
+
+function handleTimeChange(){
+  let buttons = document.getElementsByName('timer');
+  for(let button of buttons){
+    if(button.checked){
+      TIME_LIMIT = parseInt(button.value);
+      resetValues(); //rests value when the timer changes
+      break;
+    }
   }
 }
 
@@ -260,6 +281,4 @@ function resetValues() {
   error_text.textContent = 0;
   restart_btn.style.display = "none";
   cpm_group.style.display = "none";
- 
-
 }
