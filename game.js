@@ -14,6 +14,10 @@ let cpm_group = document.querySelector(".cpm");
 let wpm_group = document.querySelector(".wpm");
 let error_group = document.querySelector(".errors");
 let accuracy_group = document.querySelector(".accuracy");
+let sentences_text = document.querySelector(".sentencesTyped")
+let sentences_group = document.querySelector(".sentences")
+
+
 
 let timeLeft = TIME_LIMIT;
 let timeElapsed = 0;
@@ -25,6 +29,8 @@ let current_quote = "";
 let quoteNo = 0;
 let timer = null;
 let wordTyped = 0;
+let sentencesTyped = 0;
+
 
 async function fetchQuotes(){
   try{
@@ -77,7 +83,7 @@ function processCurrentText() {
   errors = 0;
 
 
-  quoteSpanArray = quote_text.querySelectorAll('span');
+quoteSpanArray = quote_text.querySelectorAll('span');
   quoteSpanArray.forEach((char, index) => {
     let typedChar = curr_input_array[index]
     
@@ -194,7 +200,24 @@ function startGame() {
        wpm_text.textContent = wordTyped;
 
     }
+    //check if . was pressed 
+    if(e.data === '.'){
+      sentencesTyped++;
+      sentences_text.textContent = sentencesTyped;
+    }
+
     processCurrentText()
+  });
+
+   // Check for Backspace key to handle character deletion
+   input_area.addEventListener('keydown', function (e) {
+    if (e.key === 'Backspace' && e.target.selectionStart === 0) {
+      // If the deleted character is a period, decrement sentencesTyped
+      if (curr_input.charAt(0) === '.') {
+        sentencesTyped = Math.max(0, sentencesTyped - 1);
+        sentences_text.textContent = sentencesTyped;
+      }
+    }
   });
 
 
@@ -212,7 +235,9 @@ function resetValues() {
   characterTyped = 0;
   quoteNo = 0;
   input_area.disabled = false;
-
+  sentencesTyped = 0;
+  
+  sentences_text.textContent = 0;
   input_area.value = "";
   quote_text.textContent = 'Click on the area below to start the game.';
   accuracy_text.textContent = 100;
@@ -220,4 +245,6 @@ function resetValues() {
   error_text.textContent = 0;
   restart_btn.style.display = "none";
   cpm_group.style.display = "none";
+ 
+
 }

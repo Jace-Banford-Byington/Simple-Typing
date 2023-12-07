@@ -22,7 +22,7 @@ body {
 }
 
 .timer, .errors,
-.accuracy, .cpm, .wpm {
+.accuracy, .cpm, .wpm, .sentences {
   background-color: #EABAF6;
   display: inline;
   height: 60px;
@@ -43,7 +43,7 @@ body {
 
 .curr_time, .curr_errors,
 .curr_accuracy, .curr_cpm,
-.curr_wpm {
+.curr_wpm, .sentences {
   font-size: 2.4em;
 }
 
